@@ -1,7 +1,8 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Feather } from '@expo/vector-icons';
 import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { Pressable, useColorScheme, Platform } from 'react-native';
+import Colors from '@/constants/Colors';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -18,9 +19,30 @@ export default function TabLayout() {
 
   return (
     <Tabs
-    // screenOptions={{
-    //   tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-    // }}
+      screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarInactiveTintColor: Colors[colorScheme ?? 'light'].tabIconDefault,
+        tabBarStyle: {
+          backgroundColor: Colors[colorScheme ?? 'light'].background,
+          // borderTopWidth: 0,
+          borderTopColor: Colors[colorScheme ?? 'light'].borderColor,
+        },
+        headerStyle: {
+          backgroundColor: Colors[colorScheme ?? 'light'].background,
+          // borderBottomWidth: 0,
+          borderColor: Colors[colorScheme ?? 'light'].borderColor,
+          ...Platform.select({
+            ios: {
+              shadowColor: Colors[colorScheme ?? 'light'].borderColor,
+            },
+            android: {
+              elevation: 4,
+            },
+          }),
+        },
+        headerTitleAlign: 'left', // 'center' | 'left' | 'right
+        headerTintColor: Colors[colorScheme ?? 'light'].text,
+      }}
     >
       <Tabs.Screen
         name='index'
