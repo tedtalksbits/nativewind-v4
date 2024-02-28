@@ -56,7 +56,7 @@ export default function TabLayout() {
                   <Feather
                     name='info'
                     size={25}
-                    color={'black'}
+                    color={Colors[colorScheme ?? 'light'].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}

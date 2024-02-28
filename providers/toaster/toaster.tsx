@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  useColorScheme,
 } from 'react-native';
 import {
   Toast,
@@ -14,10 +15,12 @@ import {
 } from './types';
 import { Text } from '@/components/ui/Text';
 import { FontAwesome } from '@expo/vector-icons';
+import Colors from '@/constants/Colors';
 
 const ToastContext = createContext<ToastContextData | undefined>(undefined);
 export const useToast = () => {
   const context = useContext(ToastContext);
+
   if (!context) {
     throw new Error('useToast must be used within a ToastProvider');
   }
@@ -99,7 +102,7 @@ const Toaster = ({
   const [animation] = useState(new Animated.Value(0)); // initial value for opacity: 0
   const { type, title, description, icon } = toast;
   const { removeToast } = useToast();
-
+  const colorScheme = useColorScheme();
   const toastClasess: ToastTypeClasses = {
     info: 'bg-info',
     success: 'bg-success',
@@ -186,7 +189,7 @@ const Toaster = ({
             <FontAwesome
               name='times'
               size={20}
-              color={'#000'}
+              color={Colors[colorScheme ?? 'light'].text}
               style={{ padding: 10 }}
             />
           </Text>

@@ -25,21 +25,23 @@ const TabOneScreen = () => {
             Nativewind v4 starter
           </Text>
           <TouchableOpacity
-            className='bg-destructive rounded-md p-3 mt-3'
+            className='bg-success rounded-md p-3 mt-3'
             onPress={() => {
-              toast.info({
+              toast.success({
                 title: 'Success',
                 description: 'You clicked the button!',
               });
             }}
           >
-            <Text className='text-center text-foreground'>Get started</Text>
+            <Text className='text-center text-primary-foreground'>
+              Get started
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className='bg-destructive border rounded-md p-3 mt-3'
+            className='bg-secondary rounded-md p-3 mt-3'
             onPress={() => toggleTheme()}
           >
-            <Text className='text-center text-foreground'>
+            <Text className='text-center text-secondary-foreground'>
               Toggle theme current: {theme}
             </Text>
           </TouchableOpacity>
