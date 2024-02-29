@@ -158,7 +158,7 @@ const Toaster = ({
       <View style={styles.contentContainer}>
         <View style={{ flexDirection: 'row' }}>
           {icon && <Text style={styles.iconContainer}>{icon}</Text>}
-          <Text style={styles.title}>{title}</Text>
+          <Text variant='headline'>{title}</Text>
         </View>
         <Text style={styles.description}>{description}</Text>
       </View>
@@ -188,7 +188,7 @@ const Toaster = ({
           <Text>
             <FontAwesome
               name='times'
-              size={20}
+              size={25}
               color={Colors[colorScheme ?? 'light'].text}
               style={{ padding: 10 }}
             />
@@ -222,15 +222,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 2,
 
-    width: '100%',
-  },
   description: {
-    fontSize: 14,
     width: '100%',
   },
   iconContainer: {

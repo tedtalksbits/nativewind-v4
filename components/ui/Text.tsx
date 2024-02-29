@@ -6,18 +6,22 @@ import { VariantProps, cva } from 'class-variance-authority';
 const textVariants = cva('text-base text-foreground', {
   variants: {
     variant: {
-      h1: 'text-4xl font-bold',
-      h2: 'text-3xl font-bold',
-      h3: 'text-2xl font-bold',
-      h4: 'text-xl font-bold',
-      h5: 'text-lg font-bold',
-      h6: 'text-base font-bold',
-      p: 'text-base',
+      largeTitle: 'text-[41px] font-normal leading-[51px]',
+      title1: 'text-[33px] font-normal leading-[41px]',
+      title2: 'text-[25px] font-normal leading-[32px]',
+      title3: 'text-[23px] font-normal leading-[29px]',
+      headline: 'text-[19px] font-semibold leading-[25px]',
+      body: 'text-[19px] font-normal leading-[25px]',
+      callout: 'text-[17px] font-normal leading-[22px]',
+      subhead: 'text-[15px] font-normal leading-[20px]',
+      footnote: 'text-[13px] font-normal leading-[18px]',
+      caption1: 'text-[12px] font-normal leading-[16px]',
+      caption2: 'text-[11px] font-normal leading-[13px]',
       link: 'text-blue-500 underline',
     },
   },
   defaultVariants: {
-    variant: 'p',
+    variant: 'body',
   },
 });
 interface TextProps
