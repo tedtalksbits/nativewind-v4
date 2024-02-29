@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { Text } from './Text';
 
 const buttonVariants = cva(
-  'flex flex-row items-center justify-center rounded-xl',
+  'flex flex-row items-center justify-center rounded-[9999px]',
   {
     variants: {
       variant: {
@@ -13,11 +13,13 @@ const buttonVariants = cva(
         destructive: 'bg-destructive',
         ghost: 'bg-slate-700',
         link: 'text-primary underline-offset-4',
+        outline: 'bg-transparent border border-border',
       },
       size: {
-        default: 'h-14 px-6',
+        default: 'h-12 px-6',
         sm: 'h-8 px-2',
         lg: 'h-12 px-8',
+        icon: 'h-12 w-12 p-0',
       },
     },
     defaultVariants: {
@@ -35,6 +37,7 @@ const buttonTextVariants = cva('text-center capitalize', {
       destructive: 'text-destructive-foreground',
       ghost: 'text-primary-foreground',
       link: 'text-primary-foreground underline',
+      outline: 'text-primary-foreground',
     },
   },
   defaultVariants: {
@@ -45,7 +48,7 @@ const buttonTextVariants = cva('text-center capitalize', {
 interface ButtonProps
   extends React.ComponentPropsWithoutRef<typeof TouchableOpacity>,
     VariantProps<typeof buttonVariants> {
-  label: string;
+  label?: string;
   labelClasses?: string;
 }
 function Button({
@@ -61,12 +64,15 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     >
-      <Text
-        variant='headline'
-        className={cn(buttonTextVariants({ variant }), labelClasses)}
-      >
-        {label}
-      </Text>
+      {label && (
+        <Text
+          variant='headline'
+          className={cn(buttonTextVariants({ variant }), labelClasses)}
+        >
+          {label}
+        </Text>
+      )}
+      {props.children}
     </TouchableOpacity>
   );
 }

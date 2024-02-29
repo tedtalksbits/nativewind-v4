@@ -22,22 +22,42 @@ import {
   CardTitle,
 } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { Table, TableRow } from '@/components/ui/Table';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const TabOneScreen = () => {
   const { toast } = useToast();
   const { toggleTheme, theme } = useTheme();
   return (
     <ScreenLayout>
-      <ScrollView className='bg-background flex-1 px-4 '>
+      <ScrollView
+        className='bg-background flex-1 px-4'
+        contentContainerStyle={{
+          paddingBottom: 20,
+        }}
+      >
         <View className='flex-1 pt-6'>
-          <Text variant='largeTitle'>Nativewind v4 starter</Text>
-          <View className='flex flex-row items-center justify-between gap-4'>
+          <Text variant='callout' className='text-muted-foreground'>
+            Welcome back 👋
+          </Text>
+          <Text variant='largeTitle'>Tedtalks Bits⚙️</Text>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingVertical: 20,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 20,
+            }}
+          >
             <Button
-              label='Get started'
+              label='Show Toast!'
               onPress={() => {
-                toast.success({
-                  title: 'Success',
+                toast.info({
+                  title: 'Info',
                   description: 'You clicked the button!',
+                  icon: <MaterialCommunityIcons name='information' size={24} />,
                 });
               }}
             />
@@ -47,7 +67,25 @@ const TabOneScreen = () => {
               onPress={() => toggleTheme()}
               variant='secondary'
             />
-          </View>
+            <Button
+              size='icon'
+              variant='destructive'
+              onPress={() => {
+                toast.destructive({
+                  title: 'Destructive',
+                  description: 'You clicked the button!',
+                });
+              }}
+            >
+              <MaterialCommunityIcons
+                color={'white'}
+                name='delete-forever'
+                size={24}
+              />
+            </Button>
+            <Button variant='ghost' label='Ghost' />
+            <Button variant='outline' label='Outline' />
+          </ScrollView>
         </View>
         <Card className='mt-6'>
           <CardHeader>
@@ -85,6 +123,39 @@ const TabOneScreen = () => {
             </Text>
           </CardContent>
         </Card>
+        <Table header='Table Header' headerClassName='mt-4'>
+          <TableRow
+            title='Title'
+            elementRight={
+              <MaterialCommunityIcons
+                color={'white'}
+                name='chevron-right'
+                size={24}
+              />
+            }
+          />
+
+          <TableRow
+            title='Title'
+            elementRight={
+              <MaterialCommunityIcons
+                color={'white'}
+                name='chevron-right'
+                size={24}
+              />
+            }
+          />
+          <TableRow
+            title='Title'
+            elementRight={
+              <MaterialCommunityIcons
+                color={'white'}
+                name='chevron-right'
+                size={24}
+              />
+            }
+          />
+        </Table>
       </ScrollView>
     </ScreenLayout>
   );

@@ -18,7 +18,7 @@ function CardHeader({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<typeof View>) {
-  return <View className={cn('p-4', className)} {...props} />;
+  return <View className={cn('p-8', className)} {...props} />;
 }
 
 function CardTitle({
@@ -51,7 +51,7 @@ function CardContent({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<typeof View>) {
-  return <View className={cn('p-4 pt-0', className)} {...props} />;
+  return <View className={cn('p-8 pt-0', className)} {...props} />;
 }
 
 // TODO: style
@@ -61,7 +61,7 @@ function CardFooter({
 }: React.ComponentPropsWithoutRef<typeof View>) {
   return (
     <View
-      className={cn(className, 'flex flex-row items-center p-4 pt-0')}
+      className={cn(className, 'flex flex-row items-center p-8 pt-0')}
       {...props}
     />
   );
