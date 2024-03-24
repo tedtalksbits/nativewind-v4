@@ -1,6 +1,7 @@
 import { cn } from '@/utils';
 import { TouchableOpacity, View } from 'react-native';
 import { Text } from './Text';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface TableProps extends React.ComponentPropsWithoutRef<typeof View> {
   header?: string;
@@ -62,7 +63,13 @@ function TableRow({ className, ...props }: TableRowProps) {
           </View>
         )}
       </View>
-      {props.elementRight && <View>{props.elementRight}</View>}
+      {props.elementRight ? (
+        <View>{props.elementRight}</View>
+      ) : (
+        <Text>
+          <MaterialCommunityIcons name='chevron-right' size={24} />
+        </Text>
+      )}
     </TouchableOpacity>
   );
 }
