@@ -2,14 +2,20 @@ import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-interface ScreenLayoutProps {
+import { cn } from '@/utils';
+interface ScreenLayoutProps
+  extends React.ComponentPropsWithoutRef<typeof View> {
   children: React.ReactNode;
 }
-export default function ScreenLayout({ children }: ScreenLayoutProps) {
+export const ScreenLayout = ({
+  children,
+  className,
+  ...props
+}: ScreenLayoutProps) => {
   return (
-    <SafeAreaView className='flex-1'>
+    <SafeAreaView className={cn('flex-1', className)} {...props}>
       {children}
       <StatusBar style='auto' />
     </SafeAreaView>
   );
-}
+};
