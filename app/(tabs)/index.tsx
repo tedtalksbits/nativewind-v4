@@ -126,37 +126,9 @@ const TabOneScreen = () => {
           </CardContent>
         </Card>
         <Table header='Table Header' headerClassName='mt-4'>
-          <TableRow
-            title='Title'
-            elementRight={
-              <MaterialCommunityIcons
-                color={'white'}
-                name='chevron-right'
-                size={24}
-              />
-            }
-          />
-
-          <TableRow
-            title='Title'
-            elementRight={
-              <MaterialCommunityIcons
-                color={'white'}
-                name='chevron-right'
-                size={24}
-              />
-            }
-          />
-          <TableRow
-            title='Title'
-            elementRight={
-              <MaterialCommunityIcons
-                color={'white'}
-                name='chevron-right'
-                size={24}
-              />
-            }
-          />
+          <TableRow title='Row One' />
+          <TableRow title='Row Two' />
+          <TableRow title='Row Three' />
         </Table>
       </ScreenView>
     </ScreenLayout>
