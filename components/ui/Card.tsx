@@ -8,7 +8,7 @@ function Card({
 }: React.ComponentPropsWithoutRef<typeof View>) {
   return (
     <View
-      className={cn('rounded-xl border border-border bg-card', className)}
+      className={cn('rounded-3xl border border-border bg-card', className)}
       {...props}
     />
   );
@@ -54,7 +54,6 @@ function CardContent({
   return <View className={cn('p-8 pt-0', className)} {...props} />;
 }
 
-// TODO: style
 function CardFooter({
   className,
   ...props
