@@ -1,4 +1,3 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Feather } from '@expo/vector-icons';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme, Platform } from 'react-native';
@@ -71,6 +70,15 @@ export default function TabLayout() {
           title: 'Tab Two',
           tabBarIcon: ({ color }) => (
             <TabBarIcon name='settings' color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name='charts'
+        options={{
+          title: 'Tab Three',
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name='bar-chart-2' color={color} />
           ),
         }}
       />
