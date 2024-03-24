@@ -185,13 +185,8 @@ const Toaster = ({
             <Text>{toast.action.label}</Text>
           </TouchableOpacity>
         ) : (
-          <Text>
-            <FontAwesome
-              name='times'
-              size={25}
-              color={Colors[colorScheme ?? 'light'].text}
-              style={{ padding: 10 }}
-            />
+          <Text className='mr-3'>
+            <FontAwesome name='times' size={25} />
           </Text>
         )}
       </View>
@@ -209,7 +204,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: TOAST_HEIGHT,
     width: TOAST_WIDTH,
-    borderRadius: 10,
+    borderRadius: 30,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
