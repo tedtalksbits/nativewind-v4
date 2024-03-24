@@ -11,7 +11,7 @@ const buttonVariants = cva(
         default: 'bg-primary',
         secondary: 'bg-secondary',
         destructive: 'bg-destructive',
-        ghost: 'bg-slate-700',
+        ghost: 'bg-accent',
         link: 'text-primary underline-offset-4',
         outline: 'bg-transparent border border-border',
       },
@@ -35,9 +35,9 @@ const buttonTextVariants = cva('text-center capitalize', {
       default: 'text-primary-foreground',
       secondary: 'text-secondary-foreground',
       destructive: 'text-destructive-foreground',
-      ghost: 'text-primary-foreground',
+      ghost: 'text-accent-foreground',
       link: 'text-primary-foreground underline',
-      outline: 'text-primary-foreground',
+      outline: 'text-foreground',
     },
   },
   defaultVariants: {
@@ -72,7 +72,9 @@ function Button({
           {label}
         </Text>
       )}
-      {props.children}
+      <Text className={cn(buttonTextVariants({ variant }), labelClasses)}>
+        {props.children}
+      </Text>
     </TouchableOpacity>
   );
 }
