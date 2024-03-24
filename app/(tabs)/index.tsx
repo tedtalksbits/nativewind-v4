@@ -1,17 +1,11 @@
 // tab one screen
 import { vars, useColorScheme } from 'nativewind';
-import {
-  Pressable,
-  View,
-  PressableProps,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { useToast } from '@/providers/toaster/toaster';
-import ScreenLayout from '@/components/layouts/ScreenLayout';
+import { ScreenLayout } from '@/components/layouts/ScreenLayout';
 import { useTheme } from '@/hooks/theme/useTheme';
 import { Text } from '@/components/ui/Text';
 import {
@@ -24,18 +18,14 @@ import {
 import { Button } from '@/components/ui/Button';
 import { Table, TableRow } from '@/components/ui/Table';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ScreenView from '@/components/layouts/ScreenView';
 
 const TabOneScreen = () => {
   const { toast } = useToast();
   const { toggleTheme, theme } = useTheme();
   return (
     <ScreenLayout>
-      <ScrollView
-        className='bg-background flex-1 px-4'
-        contentContainerStyle={{
-          paddingBottom: 20,
-        }}
-      >
+      <ScreenView>
         <View className='flex-1 pt-6'>
           <Text variant='callout' className='text-muted-foreground'>
             Welcome back 👋
@@ -82,6 +72,18 @@ const TabOneScreen = () => {
                 name='delete-forever'
                 size={24}
               />
+            </Button>
+            <Button
+              size='icon'
+              variant='secondary'
+              onPress={() => {
+                toast.destructive({
+                  title: 'Destructive',
+                  description: 'You clicked the button!',
+                });
+              }}
+            >
+              <MaterialCommunityIcons name='line-scan' size={24} />
             </Button>
             <Button variant='ghost' label='Ghost' />
             <Button variant='outline' label='Outline' />
@@ -156,7 +158,7 @@ const TabOneScreen = () => {
             }
           />
         </Table>
-      </ScrollView>
+      </ScreenView>
     </ScreenLayout>
   );
 };
