@@ -122,18 +122,19 @@ const SelectOptionsList = ({
   label,
 }: SelectOptionsListProps) => {
   const displayedGroups = new Set<string>();
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: (evt, gestureState) => {
-        // Check if the swipe is a downward swipe and exceeds 20 units
-        if (gestureState.dy > 50) {
-          setShowOptions && setShowOptions(false);
-        }
-      },
-    })
-  ).current;
+  // comment out the following code to allow the modal to be closed by swiping down
+  // const panResponder = useRef(
+  //   PanResponder.create({
+  //     onStartShouldSetPanResponder: () => true,
+  //     onMoveShouldSetPanResponder: () => true,
+  //     onPanResponderMove: (evt, gestureState) => {
+  //       // Check if the swipe is a downward swipe and exceeds 50 units
+  //       if (gestureState.dy > 50) {
+  //         setShowOptions && setShowOptions(false);
+  //       }
+  //     },
+  //   })
+  // ).current;
   return (
     <Modal
       visible={showOptions}
@@ -146,7 +147,7 @@ const SelectOptionsList = ({
     >
       <View
         className='bg-overlay'
-        {...panResponder.panHandlers}
+        // {...panResponder.panHandlers}
         style={{
           width: '100%',
           height: '100%',
@@ -156,6 +157,7 @@ const SelectOptionsList = ({
           zIndex: -1,
           backgroundColor: 'rgba(0,0,0,0.5)',
         }}
+        onTouchEnd={() => setShowOptions && setShowOptions(false)}
       />
       <ScrollView
         stickyHeaderIndices={[0]}
