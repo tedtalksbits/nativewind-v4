@@ -16,14 +16,14 @@ import { Button } from './Button';
 type SelectOptions = {
   label: string;
   value: string;
-  onSelect?: (value: string) => void;
+  onSelect?: ({ value, label }: { value: string; label: string }) => void;
   groupLabel?: string;
 };
 interface SelectProps extends React.ComponentPropsWithoutRef<typeof View> {
   defaultValue: string;
   options: SelectOptions[];
   children?: React.ReactNode;
-  onSelect?: (value: string) => void;
+  onSelect?: ({ value, label }: { value: string; label: string }) => void;
   label?: string;
 }
 
@@ -40,8 +40,8 @@ const Select = ({
   );
   const [showOptions, setShowOptions] = useState(false);
   const selectedClass = 'bg-primary text-primary-background rounded-xl';
-  const handleSelect = (value: string) => {
-    onSelect && onSelect(value);
+  const handleSelect = ({ value, label }: { value: string; label: string }) => {
+    onSelect && onSelect({ value, label });
     setSelectedValue(value);
   };
 
@@ -105,7 +105,13 @@ const SelectOption = ({ children, className, ...props }: SelectOptionProps) => {
 interface SelectOptionsListProps {
   options: SelectOptions[];
   selectedValue: string;
-  setSelectedValue: (value: string) => void;
+  setSelectedValue: ({
+    value,
+    label,
+  }: {
+    value: string;
+    label: string;
+  }) => void;
   selectedClass: string;
   setShowOptions?: (value: boolean) => void;
   showOptions: boolean;
@@ -191,7 +197,7 @@ const SelectOptionsList = ({
         )}
 
         {options.map((option, index) => {
-          // deter if we need to show the group label
+          // determine if we need to show the group label
           let showGroupLabel = false;
           if (option.groupLabel && !displayedGroups.has(option.groupLabel)) {
             showGroupLabel = true;
@@ -212,7 +218,10 @@ const SelectOptionsList = ({
               )}
               <SelectOption
                 onPress={() => {
-                  setSelectedValue(option.value);
+                  setSelectedValue({
+                    value: option.value,
+                    label: option.label,
+                  });
                   setShowOptions && setShowOptions(false);
                 }}
                 className={cn(
