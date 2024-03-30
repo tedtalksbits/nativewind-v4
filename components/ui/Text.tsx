@@ -28,7 +28,7 @@ interface TextProps
   extends React.ComponentPropsWithoutRef<typeof TextComponent>,
     VariantProps<typeof textVariants> {}
 
-function Text({ children, className, variant, ...props }: TextProps) {
+const Text = ({ children, className, variant, ...props }: TextProps) => {
   return (
     <TextComponent
       className={cn(textVariants({ variant }), className)}
@@ -37,7 +37,7 @@ function Text({ children, className, variant, ...props }: TextProps) {
       {children}
     </TextComponent>
   );
-}
+};
 /*
   ========================================
   ALTERNAIVE IMPLEMENTATION

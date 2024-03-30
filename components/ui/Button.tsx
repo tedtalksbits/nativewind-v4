@@ -51,14 +51,14 @@ interface ButtonProps
   label?: string;
   labelClasses?: string;
 }
-function Button({
+const Button = ({
   label,
   labelClasses,
   className,
   variant,
   size,
   ...props
-}: ButtonProps) {
+}: ButtonProps) => {
   return (
     <TouchableOpacity
       className={cn(buttonVariants({ variant, size, className }))}
@@ -77,6 +77,6 @@ function Button({
       </Text>
     </TouchableOpacity>
   );
-}
+};
 
 export { Button, buttonVariants, buttonTextVariants };

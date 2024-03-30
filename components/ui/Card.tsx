@@ -2,29 +2,29 @@ import { cn } from '@/utils';
 import { View } from 'react-native';
 import { Text } from './Text';
 
-function Card({
+const Card = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <View
       className={cn('rounded-3xl border border-border bg-card', className)}
       {...props}
     />
   );
-}
+};
 
-function CardHeader({
+const CardHeader = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return <View className={cn('p-8', className)} {...props} />;
-}
+};
 
-function CardTitle({
+const CardTitle = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <Text
       variant='title2'
@@ -32,12 +32,12 @@ function CardTitle({
       {...props}
     />
   );
-}
+};
 
-function CardDescription({
+const CardDescription = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <Text
       variant='subhead'
@@ -45,26 +45,26 @@ function CardDescription({
       {...props}
     />
   );
-}
+};
 
-function CardContent({
+const CardContent = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return <View className={cn('p-8 pt-0', className)} {...props} />;
-}
+};
 
-function CardFooter({
+const CardFooter = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <View
       className={cn(className, 'flex flex-row items-center p-8 pt-0')}
       {...props}
     />
   );
-}
+};
 
 export {
   Card,
