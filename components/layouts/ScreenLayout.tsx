@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 interface ScreenLayoutProps
   extends React.ComponentPropsWithoutRef<typeof View> {
   children: React.ReactNode;

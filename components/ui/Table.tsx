@@ -1,14 +1,30 @@
-import { cn } from '@/utils';
-import { TouchableOpacity, View } from 'react-native';
+import { cn } from '@/lib/utils';
+import { TextProps, TouchableOpacity, View } from 'react-native';
 import { Text } from './Text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
+import { useTheme } from '@/hooks/theme/useTheme';
 
 interface TableProps extends React.ComponentPropsWithoutRef<typeof View> {
   header?: string;
   headerClassName?: string;
   children: React.ReactNode | React.ReactNode[];
 }
+
+interface TableHeaderprops
+  extends React.ComponentPropsWithoutRef<typeof Text> {}
+
+const TableHeader = ({ children, className, ...props }: TableHeaderprops) => {
+  return (
+    <Text
+      variant={props.variant || 'caption1'}
+      className={cn('text-muted-foreground mt-8 mb-4 uppercase', className)}
+      {...props}
+    >
+      {children}
+    </Text>
+  );
+};
 
 const Table = ({
   children,
@@ -52,12 +68,25 @@ const Table = ({
 interface TableRowProps
   extends React.ComponentPropsWithoutRef<typeof TouchableOpacity> {
   title: string;
+  titleClassName?: string;
+  titleStyle?: TextProps['style'];
+  descriptionClassName?: string;
+  descriptionStyle?: TextProps['style'];
   elementLeft?: React.ReactNode;
   elementRight?: React.ReactNode;
   description?: string;
   isLastChild?: boolean;
 }
-const TableRow = ({ className, isLastChild, ...props }: TableRowProps) => {
+const TableRow = ({
+  className,
+  isLastChild,
+  titleClassName,
+  titleStyle,
+  descriptionClassName,
+  descriptionStyle,
+  ...props
+}: TableRowProps) => {
+  const { colors } = useTheme();
   return (
     <TouchableOpacity
       {...props}
@@ -70,27 +99,40 @@ const TableRow = ({ className, isLastChild, ...props }: TableRowProps) => {
         }`}
       >
         <View>
-          <Text variant='headline' className='text-foreground'>
+          <Text
+            variant='headline'
+            className={cn('text-foreground', titleClassName)}
+            style={titleStyle}
+          >
             {props.title}
           </Text>
         </View>
         {props.description && (
           <View>
-            <Text variant='subhead' className='text-muted-foreground'>
+            <Text
+              variant='subhead'
+              className={cn('text-muted-foreground', descriptionClassName)}
+              style={descriptionStyle}
+            >
               {props.description}
             </Text>
           </View>
         )}
+        {props.children}
       </View>
       {props.elementRight ? (
         <View>{props.elementRight}</View>
       ) : (
         <Text>
-          <MaterialCommunityIcons name='chevron-right' size={24} />
+          <MaterialCommunityIcons
+            name='chevron-right'
+            size={24}
+            color={colors['--input']}
+          />
         </Text>
       )}
     </TouchableOpacity>
   );
 };
 
-export { Table, TableRow };
+export { Table, TableRow, TableHeader };

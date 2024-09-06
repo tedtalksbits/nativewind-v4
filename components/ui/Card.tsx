@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 import { View } from 'react-native';
 import { Text } from './Text';
 
@@ -60,7 +60,7 @@ const CardFooter = ({
 }: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <View
-      className={cn(className, 'flex flex-row items-center p-8 pt-0')}
+      className={cn('flex flex-row items-center p-8 pt-0', className)}
       {...props}
     />
   );

@@ -2,29 +2,38 @@ import { cn } from '@/lib/utils';
 import {
   Dimensions,
   Modal,
-  PanResponder,
   ScrollView,
-  Touchable,
+  TextProps,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Text } from './Text';
-import { useRef, useState } from 'react';
-import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useState } from 'react';
+import {
+  AntDesign,
+  Feather,
+  Ionicons,
+  MaterialCommunityIcons,
+} from '@expo/vector-icons';
 import { Button } from './Button';
+import { useTheme } from '@/hooks/theme/useTheme';
+import { Input } from './Input';
 
 type SelectOptions = {
-  label: string;
-  value: string;
-  onSelect?: ({ value, label }: { value: string; label: string }) => void;
+  label: any;
+  value: any;
+  onSelect?: ({ value, label }: { value: any; label: any }) => void;
   groupLabel?: string;
 };
 interface SelectProps extends React.ComponentPropsWithoutRef<typeof View> {
   defaultValue: string;
   options: SelectOptions[];
   children?: React.ReactNode;
-  onSelect?: ({ value, label }: { value: string; label: string }) => void;
+  onSelect?: ({ value, label }: { value: any; label: any }) => void;
   label?: string;
+  labelClassName?: string;
+  labelStyle?: TextProps['style'];
+  onSearch?: (value: string) => void;
 }
 
 const Select = ({
@@ -33,8 +42,12 @@ const Select = ({
   options,
   onSelect,
   label,
+  labelClassName,
+  labelStyle,
+  onSearch,
   ...props
 }: SelectProps) => {
+  const { colors } = useTheme();
   const [selectedValue, setSelectedValue] = useState(
     defaultValue || options[0].value
   );
@@ -48,32 +61,35 @@ const Select = ({
   return (
     <>
       {label && (
-        <Text variant='subhead' className='text-muted-foreground'>
+        <Text
+          className={cn('text-muted-foreground', labelClassName)}
+          style={[{ fontSize: 18 }, labelStyle]}
+        >
           {label}
         </Text>
       )}
-      <View
-        className={cn(
-          'rounded-xl border border-border bg-background',
-          className
-        )}
-        {...props}
-      >
-        <TouchableOpacity
+
+      <View className={cn('rounded-xl  bg-background', className)} {...props}>
+        <View
           className='flex-row items-center justify-between'
-          onPress={() => setShowOptions(!showOptions)}
+          onTouchStart={() => setShowOptions(!showOptions)}
         >
-          <Text variant='subhead' className='p-4'>
+          <Text
+            className={cn('p-4', labelClassName)}
+            style={[{ fontSize: 18 }, labelStyle]}
+          >
+            <AntDesign name='check' size={20} className='mr-2' />{' '}
             {options.find((option) => option.value === selectedValue)?.label ||
               defaultValue}
           </Text>
-          <Text className='mr-3'>
-            <FontAwesome
-              name={showOptions ? 'chevron-up' : 'chevron-down'}
-              size={20}
+          <Text>
+            <Ionicons
+              color={colors['--ring']}
+              name={showOptions ? 'chevron-collapse' : 'chevron-expand'}
+              size={24}
             />
           </Text>
-        </TouchableOpacity>
+        </View>
 
         <SelectOptionsList
           label={label}
@@ -161,12 +177,14 @@ const SelectOptionsList = ({
           top: 0,
           left: 0,
           zIndex: -1,
-          backgroundColor: 'rgba(0,0,0,0.5)',
+          backgroundColor: 'rgba(0,0,0,0.9)',
         }}
         onTouchEnd={() => setShowOptions && setShowOptions(false)}
       />
       <ScrollView
+        // make the header sticky when scrolling if there is a label
         stickyHeaderIndices={[0]}
+        showsVerticalScrollIndicator={false}
         onScrollToTop={(e) => {
           console.log('scroll to top', e);
         }}
@@ -182,19 +200,20 @@ const SelectOptionsList = ({
           paddingBottom: 100,
         }}
       >
-        {label && (
-          <View className='bg-accent py-4 justify-between flex-row items-center'>
+        <View className='bg-accent py-4 '>
+          <View className='justify-between flex-row items-center'>
             <Text variant='subhead' className='text-muted-foreground'>
-              {label}
+              {label ? label : 'Select an option'}
             </Text>
             <Button
+              className='ml-auto'
               variant='ghost'
               onPress={() => setShowOptions && setShowOptions(false)}
             >
-              <FontAwesome name='times' size={20} />
+              <AntDesign name='close' size={20} />
             </Button>
           </View>
-        )}
+        </View>
 
         {options.map((option, index) => {
           // determine if we need to show the group label
@@ -207,7 +226,7 @@ const SelectOptionsList = ({
             <View
               key={index}
               className={cn(
-                'border-b border-border w-full',
+                'border-b border-border w-full py-2',
                 showGroupLabel ? 'pt-2' : ''
               )}
             >
@@ -228,12 +247,12 @@ const SelectOptionsList = ({
                   selectedValue === option.value ? selectedClass : ''
                 )}
               >
-                {option.label}
                 {selectedValue === option.value && (
-                  <Text>
-                    <MaterialCommunityIcons name='check' size={20} />
+                  <Text className='mr-3'>
+                    <AntDesign name='check' size={20} />
                   </Text>
                 )}
+                {option.label}
               </SelectOption>
             </View>
           );

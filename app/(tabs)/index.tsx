@@ -19,13 +19,18 @@ import { Button } from '@/components/ui/Button';
 import { Table, TableRow } from '@/components/ui/Table';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ScreenView from '@/components/layouts/ScreenView';
+import ScreenScrollView from '@/components/layouts/ScreenScrollView';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { RadioGroup } from '@/components/ui/RadioGroup';
+import { CollapseContent, CollapseTrigger } from '@/components/ui/Collapse';
 
 const TabOneScreen = () => {
   const { toast } = useToast();
   const { toggleTheme, theme } = useTheme();
+  const [isExpanded, setIsExpanded] = React.useState(false);
   return (
     <ScreenLayout>
-      <ScreenView>
+      <ScreenScrollView>
         <View className='flex-1 pt-6'>
           <Text variant='callout' className='text-muted-foreground'>
             Welcome back 👋
@@ -130,7 +135,39 @@ const TabOneScreen = () => {
           <TableRow title='Row Two' />
           <TableRow title='Row Three' />
         </Table>
-      </ScreenView>
+        <EmptyState
+          title='Empty State'
+          description='No items to show'
+          iconName='bed-empty'
+        />
+        <RadioGroup
+          label='Radio Group'
+          indicatorType='circle'
+          options={[
+            { label: 'Option One', value: 'option_one' },
+            { label: 'Option Two', value: 'option_two' },
+            { label: 'Option Three', value: 'option_three' },
+          ]}
+          defaultValue='option_one'
+          onChange={(v) => console.log(v)}
+        />
+
+        <CollapseTrigger
+          onToggle={() => setIsExpanded(!isExpanded)}
+          expanded={isExpanded}
+        >
+          <Text>Hello</Text>
+        </CollapseTrigger>
+        <CollapseContent expanded={isExpanded}>
+          <Text>World</Text>
+        </CollapseContent>
+
+        <View className='divide-y-2'>
+          <Text>0</Text>
+          <Text>1</Text>
+          <Text>2</Text>
+        </View>
+      </ScreenScrollView>
     </ScreenLayout>
   );
 };

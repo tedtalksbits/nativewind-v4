@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
@@ -6,6 +6,7 @@ import {
   Animated,
   StyleSheet,
 } from 'react-native';
+import { Text } from './Text';
 
 interface CollapseTriggerProps {
   children: React.ReactNode;
@@ -45,6 +46,7 @@ const CollapseTrigger = ({
         {children}
         <Animated.View style={{ transform: [{ rotate }] }}>
           <MaterialCommunityIcons name='chevron-down' size={24} color='black' />
+          <Ionicons name='arrow-down' size={24} color='black' />
         </Animated.View>
       </View>
     </TouchableWithoutFeedback>

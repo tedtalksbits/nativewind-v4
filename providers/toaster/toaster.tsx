@@ -15,7 +15,6 @@ import {
 } from './types';
 import { Text } from '@/components/ui/Text';
 import { FontAwesome } from '@expo/vector-icons';
-import Colors from '@/constants/Colors';
 
 const ToastContext = createContext<ToastContextData | undefined>(undefined);
 export const useToast = () => {
@@ -158,9 +157,13 @@ const Toaster = ({
       <View style={styles.contentContainer}>
         <View style={{ flexDirection: 'row' }}>
           {icon && <Text style={styles.iconContainer}>{icon}</Text>}
-          <Text variant='headline'>{title}</Text>
+          <Text className='font-semibold' variant='callout'>
+            {title}
+          </Text>
         </View>
-        <Text style={styles.description}>{description}</Text>
+        <Text variant='caption1' style={styles.description}>
+          {description}
+        </Text>
       </View>
       <View
         style={styles.iconContainer}
@@ -194,8 +197,8 @@ const Toaster = ({
   );
 };
 export const TOAST_WIDTH = 340;
-export const TOAST_INNER_PADDING = 20;
-export const TOAST_HEIGHT = 50 + TOAST_INNER_PADDING * 2;
+export const TOAST_INNER_PADDING = 10;
+export const TOAST_HEIGHT = 40 + TOAST_INNER_PADDING * 2;
 const styles = StyleSheet.create({
   base: {
     position: 'absolute',
@@ -209,6 +212,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 2,
+    zIndex: 9999,
   },
   contentContainer: {
     paddingHorizontal: 25,

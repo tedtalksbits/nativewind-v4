@@ -18,14 +18,27 @@
     "ios": {
       "supportsTablet": true,
       "userInterfaceStyle": "automatic",
-      "requireFullScreen": true
+      "requireFullScreen": true,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "NSCalendarsUsageDescription": "The app needs to access your calendar.",
+        "NSRemindersUsageDescription": "Allow $(PRODUCT_NAME) to access your reminders",
+        "NSCalendarsFullAccessUsageDescription": "The app needs to access your calendar.",
+        "NSRemindersFullAccessUsageDescription": "Allow $(PRODUCT_NAME) to access your reminders"
+      }
     },
     "android": {
       "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -39,7 +52,20 @@
         {
           "initialOrientation": "DEFAULT"
         }
-      ]
+      ],
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
+        }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "The app needs to access your calendar."
+        }
+      ],
+      "expo-font"
     ],
     "experiments": {
       "tsconfigPaths": true,

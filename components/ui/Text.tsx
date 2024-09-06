@@ -1,7 +1,6 @@
 import { Text as TextComponent } from 'react-native';
 import React from 'react';
-import { useTheme } from '@/hooks/theme/useTheme';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 const textVariants = cva('text-base text-foreground', {
   variants: {
